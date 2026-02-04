@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ category.name }} — Восточный Лист{% endblock %}
+{% block content %}
+<section class="section catalog" id="catalog">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">{{ category.name }}</h2>
+            <p class="section-subtitle">{% if category.description %}{{ category.description }}{% else %}Товары категории «{{ category.name }}»{% endif %}</p>
+        </div>
+
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:cover;">
+                    {% else %}
+                    <i class="fas fa-leaf"></i>
+                    {% endif %}
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <span class="product-type">{{ product.category.name }}</span>
+                    <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+                    {% if product.region %}<div class="product-meta"><span class="product-region">{{ product.region }}</span>{% if product.weight %}<span>{{ product.weight }}</span>{% endif %}</div>{% endif %}
+                    <div class="product-footer">
+                        <span class="product-price">{{ product.price }} ₽{% if product.weight %} / {{ product.weight }}{% endif %}</span>
+                        <form action="{% url 'cart:add_to_cart' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary btn-small add-to-cart-btn">В корзину</button>
+                        </form>
+                    </div>
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-secondary btn-small" style="margin-top:0.5rem;">Подробнее</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center" style="grid-column:1/-1;">В этой категории пока нет товаров.</p>
+            {% endfor %}
+        </div>
+        <p style="margin-top:2rem;"><a href="{% url 'products:catalog' %}" class="btn btn-secondary">← Весь каталог</a></p>
+    </div>
+</section>
+{% endblock %}

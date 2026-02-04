@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.name }} — Восточный Лист{% endblock %}
+{% block content %}
+<section class="section" style="padding-top: 6rem;">
+    <div class="container">
+        <div class="product-detail" style="display:grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+            <div class="product-detail-image" style="background: var(--cream); border-radius: var(--radius); overflow: hidden; aspect-ratio: 1;">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:cover;">
+                {% else %}
+                <div style="display:flex; align-items:center; justify-content:center; height:100%; font-size:5rem; color: var(--text-light);"><i class="fas fa-leaf"></i></div>
+                {% endif %}
+            </div>
+            <div>
+                <h1 class="section-title">{{ product.name }}</h1>
+                <p class="product-type" style="margin-bottom:1rem;">Категория: <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></p>
+                <p class="section-subtitle" style="text-align:left;">{{ product.description }}</p>
+                {% if product.region %}<p><strong>Регион:</strong> {{ product.region }}</p>{% endif %}
+                {% if product.weight %}<p><strong>Фасовка:</strong> {{ product.weight }}</p>{% endif %}
+                <p><strong>В наличии:</strong> {{ product.stock }} шт.</p>
+                <p class="product-price" style="font-size:2rem; margin:1.5rem 0;">{{ product.price }} ₽</p>
+                <form action="{% url 'cart:add_to_cart' %}" method="post" style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <label>Количество: <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" style="width:80px; padding:0.5rem;"></label>
+                    <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+                </form>
+                <a href="{% url 'products:catalog' %}" class="btn btn-secondary" style="margin-top:1rem;">← Вернуться в каталог</a>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+@media (max-width: 768px) {
+    .product-detail { grid-template-columns: 1fr !important; }
+}
+</style>
+{% endblock %}

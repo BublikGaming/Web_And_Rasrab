@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Главная — Восточный Лист — Импорт элитного чая из Китая{% endblock %}
+{% block content %}
+    <!-- Геро-секция -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Элитный чай. Прямо из сердцевины Китая.</h1>
+                <p class="hero-subtitle">Прямые поставки с плантаций Фуцзяни, Юньнани и Аньхоя. Гарантия подлинности и свежести.</p>
+                <div class="hero-actions">
+                    <a href="{% url 'products:catalog' %}" class="btn btn-primary">Выбрать чай</a>
+                    <a href="{% url 'business' %}" class="btn btn-secondary">Партнерам</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="{% url 'products:catalog' %}" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+{% endblock %}

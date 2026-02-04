@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Восточный Лист - Импорт элитного чая из Китая{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍃</text></svg>">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="{% url 'home' %}" class="logo">
+                    <span class="logo-icon">🍃</span>
+                    <span class="logo-text">Восточный Лист</span>
+                </a>
+
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="{% url 'home' %}" class="nav-link">Главная</a></li>
+                        <li><a href="{% url 'products:catalog' %}" class="nav-link">Каталог</a></li>
+                        <li><a href="{% url 'about' %}" class="nav-link">О нас</a></li>
+                        <li><a href="{% url 'business' %}" class="nav-link">Для бизнеса</a></li>
+                        <li><a href="{% url 'contacts' %}" class="nav-link">Контакты</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="btn-icon search-btn" aria-label="Поиск">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="{% url 'cart:cart' %}" class="btn-icon cart-link" aria-label="Корзина" id="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">{{ cart.total_items|default:0 }}</span>
+                    </a>
+                    <button class="btn-icon menu-btn" aria-label="Меню">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo logo-footer">
+                        <span class="logo-icon">🍃</span>
+                        <span class="logo-text">Восточный Лист</span>
+                    </div>
+                    <p class="footer-text">Прямой импорт элитного китайского чая с 2010 года.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'products:catalog' %}">Каталог</a></li>
+                        <li><a href="{% url 'about' %}">О нас</a></li>
+                        <li><a href="{% url 'business' %}">Для бизнеса</a></li>
+                        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Категории чая</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'products:category_detail' 'green' %}">Зеленый чай</a></li>
+                        <li><a href="{% url 'products:category_detail' 'oolong' %}">Улуны</a></li>
+                        <li><a href="{% url 'products:category_detail' 'puer' %}">Пуэры</a></li>
+                        <li><a href="{% url 'products:category_detail' 'red' %}">Красный чай</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Подписка</h3>
+                    <p class="footer-text">Новости, новые сорта, акции</p>
+                    <form class="subscribe-form" id="subscribeForm">
+                        {% csrf_token %}
+                        <input type="email" placeholder="Ваш email" required>
+                        <button type="submit" class="btn btn-small">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">© «Восточный Лист», 2010–2023. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Политика конфиденциальности</a>
+                    <a href="#terms">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Корзина (модальное окно) -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Корзина</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items" id="cartItems"></div>
+                <div class="cart-empty" id="cartEmpty">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Корзина пуста</p>
+                </div>
+                <div class="cart-total" id="cartTotal">
+                    <div class="total-row">
+                        <span>Итого:</span>
+                        <span class="total-price">0 ₽</span>
+                    </div>
+                    <button class="btn btn-primary btn-block">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification"></div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

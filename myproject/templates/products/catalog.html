@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Каталог товаров — Восточный Лист{% endblock %}
+{% block content %}
+<section class="section catalog" id="catalog">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Наш каталог</h2>
+            <p class="section-subtitle">Отборные сорта из разных регионов Китая</p>
+        </div>
+
+        <form method="get" class="catalog-toolbar" style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; margin-bottom:2rem;">
+            <div class="catalog-filters" style="flex:1 1 auto;">
+                <a href="{% url 'products:catalog' %}" class="filter-btn {% if not request.GET.category %}active{% endif %}">Все</a>
+                {% for cat in categories %}
+                <a href="{% url 'products:catalog' %}?category={{ cat.slug }}" class="filter-btn {% if request.GET.category == cat.slug %}active{% endif %}">{{ cat.name }}</a>
+                {% endfor %}
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+                <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Поиск..." style="padding:0.5rem 1rem; border-radius:6px; border:1px solid var(--border-dark);">
+                <select name="sort" style="padding:0.5rem 1rem; border-radius:6px; border:1px solid var(--border-dark);">
+                    <option value="name" {% if request.GET.sort == "name" %}selected{% endif %}>По названию</option>
+                    <option value="price_asc" {% if request.GET.sort == "price_asc" %}selected{% endif %}>Сначала дешевле</option>
+                    <option value="price_desc" {% if request.GET.sort == "price_desc" %}selected{% endif %}>Сначала дороже</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-small">Найти</button>
+            </div>
+        </form>
+
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:cover;">
+                    {% else %}
+                    <i class="fas fa-leaf"></i>
+                    {% endif %}
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <span class="product-type">{{ product.category.name }}</span>
+                    <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+                    {% if product.region %}<div class="product-meta"><span class="product-region">{{ product.region }}</span>{% if product.weight %}<span>{{ product.weight }}</span>{% endif %}</div>{% endif %}
+                    <div class="product-footer">
+                        <span class="product-price">{{ product.price }} ₽{% if product.weight %} / {{ product.weight }}{% endif %}</span>
+                        <form action="{% url 'cart:add_to_cart' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary btn-small add-to-cart-btn">В корзину</button>
+                        </form>
+                    </div>
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-secondary btn-small" style="margin-top:0.5rem;">Подробнее</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center" style="grid-column:1/-1;">Товаров пока нет.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
