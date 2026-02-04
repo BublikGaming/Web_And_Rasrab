@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Восточный Лист - Импорт элитного чая из Китая</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍃</text></svg>">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">
+                    <span class="logo-icon">🍃</span>
+                    <span class="logo-text">Восточный Лист</span>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="#hero" class="nav-link active">Главная</a></li>
+                        <li><a href="#catalog" class="nav-link">Каталог</a></li>
+                        <li><a href="#about" class="nav-link">О нас</a></li>
+                        <li><a href="#business" class="nav-link">Для бизнеса</a></li>
+                        <li><a href="#contacts" class="nav-link">Контакты</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="btn-icon search-btn" aria-label="Поиск">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="btn-icon cart-btn" aria-label="Корзина">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </button>
+                    <button class="btn-icon menu-btn" aria-label="Меню">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Геро-секция -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Элитный чай. Прямо из сердцевины Китая.</h1>
+                <p class="hero-subtitle">Прямые поставки с плантаций Фуцзяни, Юньнани и Аньхоя. Гарантия подлинности и свежести.</p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn btn-primary">Выбрать чай</a>
+                    <a href="#business" class="btn btn-secondary">Партнерам</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#catalog" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Каталог товаров -->
+    <section class="section catalog" id="catalog">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Наш каталог</h2>
+                <p class="section-subtitle">Отборные сорта из разных регионов Китая</p>
+            </div>
+            
+            <div class="catalog-filters">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="green">Зеленый</button>
+                <button class="filter-btn" data-filter="oolong">Улун</button>
+                <button class="filter-btn" data-filter="puer">Пуэр</button>
+                <button class="filter-btn" data-filter="black">Красный</button>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Товары будут добавлены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">О компании</h2>
+                <p class="section-subtitle">Восточный Лист - эксперты в китайском чае с 2010 года</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>12 лет на рынке элитного чая</h3>
+                    <p>Мы специализируемся на прямом импорте редких сортов китайского чая, работая напрямую с мелкими семейными плантациями и сертифицированными фермами.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">прямых контрактов</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">сортов чая</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">регионов Китая</span>
+                        </div>
+                    </div>
+                    
+                    <div class="advantages">
+                        <div class="advantage">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Прямые поставки с плантаций</span>
+                        </div>
+                        <div class="advantage">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Контроль качества на всех этапах</span>
+                        </div>
+                        <div class="advantage">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Экспертная оценка каждого сорта</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-leaf"></i>
+                        <p>Чайная плантация</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Для бизнеса -->
+    <section class="section business" id="business">
+        <div class="container">
+            <div class="business-card">
+                <div class="business-content">
+                    <h2 class="business-title">Сотрудничество для бизнеса</h2>
+                    <p class="business-text">Оптовые поставки для ресторанов, отелей, чайных магазинов и корпоративных клиентов.</p>
+                    
+                    <ul class="business-list">
+                        <li><i class="fas fa-check"></i> Индивидуальные условия</li>
+                        <li><i class="fas fa-check"></i> Брендирование упаковки</li>
+                        <li><i class="fas fa-check"></i> Консультации от титестера</li>
+                        <li><i class="fas fa-check"></i> Гибкая система скидок</li>
+                    </ul>
+                    
+                    <form class="business-form" id="businessForm">
+                        <h3>Отправить запрос</h3>
+                        <div class="form-group">
+                            <input type="text" placeholder="Название компании" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Контактное лицо" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Телефон" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Комментарий (желаемый объем, сроки и т.д.)"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить запрос</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="section contacts" id="contacts">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Контакты</h2>
+                <p class="section-subtitle">Свяжитесь с нами удобным способом</p>
+            </div>
+            
+            <div class="contacts-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Телефон</h3>
+                            <a href="tel:+78001234567">8 (800) 123-45-67</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <a href="mailto:info@east-leaf.ru">info@east-leaf.ru</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Адрес</h3>
+                            <p>Москва, ул. Чайная, 15</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>График работы</h3>
+                            <p>Пн-Пт: 9:00-18:00</p>
+                            <p>Сб: 10:00-16:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Написать сообщение</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Ваш email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Корзина (модальное окно) -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Корзина</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items" id="cartItems">
+                    <!-- Товары в корзине -->
+                </div>
+                <div class="cart-empty" id="cartEmpty">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Корзина пуста</p>
+                </div>
+                <div class="cart-total" id="cartTotal">
+                    <div class="total-row">
+                        <span>Итого:</span>
+                        <span class="total-price">0 ₽</span>
+                    </div>
+                    <button class="btn btn-primary btn-block">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo logo-footer">
+                        <span class="logo-icon">🍃</span>
+                        <span class="logo-text">Восточный Лист</span>
+                    </div>
+                    <p class="footer-text">Прямой импорт элитного китайского чая с 2010 года.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#catalog">Каталог</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#business">Для бизнеса</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Категории чая</h3>
+                    <ul class="footer-links">
+                        <li><a href="#catalog" data-filter="green">Зеленый чай</a></li>
+                        <li><a href="#catalog" data-filter="oolong">Улуны</a></li>
+                        <li><a href="#catalog" data-filter="puer">Пуэры</a></li>
+                        <li><a href="#catalog" data-filter="black">Красный чай</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Подписка</h3>
+                    <p class="footer-text">Новости, новые сорта, акции</p>
+                    <form class="subscribe-form" id="subscribeForm">
+                        <input type="email" placeholder="Ваш email" required>
+                        <button type="submit" class="btn btn-small">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© «Восточный Лист», 2010–2023. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Политика конфиденциальности</a>
+                    <a href="#terms">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Скрипты -->
+    <script src="script.js"></script>
+</body>
+</html>
