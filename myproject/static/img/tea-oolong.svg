@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 110">
+  <defs>
+    <linearGradient id="teaOolong" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8F0D8"/>
+      <stop offset="1" stop-color="#D9B87A"/>
+    </linearGradient>
+  </defs>
+  <rect x="14" y="32" width="102" height="42" rx="16" fill="#F9F7F4" stroke="#C8A97E" stroke-width="2.5"/>
+  <rect x="22" y="48" width="86" height="18" rx="10" fill="url(#teaOolong)"/>
+  <path d="M26 50c6 10 16 18 39 18s33-8 39-18" fill="none" stroke="#3A6B3F" stroke-width="2.6"/>
+  <path d="M118 40c10 0 18 8 18 18s-8 18-18 18h-9" fill="none" stroke="#A35745" stroke-width="3"/>
+  <circle cx="120" cy="52" r="7" fill="#A35745" opacity="0.2"/>
+  <path d="M30 22c3-6 5-11 5-16M44 24c3-6 5-11 5-16" fill="none" stroke="#6C6559" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
+

@@ -41,3 +41,26 @@ class CartItem(models.Model):
     @property
     def total_price(self):
         return self.product.price * self.quantity
+
+
+class Order(models.Model):
+    PAYMENT_METHOD_CHOICES = (
+        ("card", "Банковская карта"),
+        ("cash", "Наличные курьеру"),
+    )
+
+    cart = models.OneToOneField(Cart, on_delete=models.CASCADE, related_name="order")
+    full_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=50)
+    address = models.CharField(max_length=255)
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, default="card")
+    paid = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Заказ"
+        verbose_name_plural = "Заказы"
+
+    def __str__(self) -> str:
+        return f"Заказ #{self.pk} на сумму {self.cart.total_price} ₽"

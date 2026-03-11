@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import ensure_csrf_cookie
 from products.models import Product
-from .models import Cart, CartItem
+from .models import Cart, CartItem, Order
+import qrcode
+from io import BytesIO
 import json
 
 
@@ -69,3 +71,53 @@ def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart=cart)
     cart_item.delete()
     return redirect('cart:cart')
+
+
+def checkout(request):
+    """Страница оплаты по СБП с QR-кодом."""
+    cart = get_or_create_cart(request)
+    if not cart.items.exists():
+        return redirect('cart:cart')
+
+    order, _ = Order.objects.get_or_create(
+        cart=cart,
+        defaults={
+            "full_name": "",
+            "email": "",
+            "phone": "",
+            "address": "",
+            "payment_method": "sbp",
+            "paid": False,
+        },
+    )
+
+    if request.method == "POST":
+        order.paid = True  # считаем, что оплата по СБП прошла успешно
+        order.payment_method = "sbp"
+        order.save()
+        return redirect("cart:checkout_success", order_id=order.id)
+
+    return render(request, "cart/checkout.html", {"cart": cart, "order": order})
+
+
+def checkout_success(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    cart = order.cart
+    return render(request, "cart/checkout_success.html", {"order": order, "cart": cart})
+
+
+def sbp_qr(request, order_id):
+    """Генерация QR-кода для оплаты по СБП (учебный пример)."""
+    order = get_object_or_404(Order, pk=order_id)
+    amount = order.cart.total_price
+    payload = f"SBP|ORDER={order.id}|AMOUNT={amount}"
+
+    qr = qrcode.QRCode(box_size=6, border=2)
+    qr.add_data(payload)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    buffer = BytesIO()
+    img.save(buffer, format="PNG")
+    buffer.seek(0)
+    return HttpResponse(buffer.getvalue(), content_type="image/png")

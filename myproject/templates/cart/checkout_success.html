@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Заказ оформлен — Восточный Лист{% endblock %}
+{% block content %}
+<section class="section" style="padding-top: 6rem;">
+    <div class="container" style="max-width: 700px; text-align:center;">
+        <h1 class="section-title">Спасибо за заказ!</h1>
+        <p class="section-subtitle" style="text-align:center;">
+            Ваш заказ №{{ order.id }} успешно оформлен и оплачен (учебная симуляция оплаты).
+        </p>
+        <div style="margin:2rem 0; background:var(--cream); padding:1.5rem; border-radius:var(--radius); text-align:left;">
+            <p><strong>Сумма:</strong> {{ cart.total_price }} ₽</p>
+            <p><strong>ФИО:</strong> {{ order.full_name }}</p>
+            <p><strong>Email:</strong> {{ order.email }}</p>
+            <p><strong>Телефон:</strong> {{ order.phone }}</p>
+            <p><strong>Адрес доставки:</strong> {{ order.address }}</p>
+            <p><strong>Способ оплаты:</strong>
+                {% if order.payment_method == 'card' %}Банковская карта{% else %}Наличные курьеру{% endif %}
+            </p>
+        </div>
+        <a href="{% url 'products:catalog' %}" class="btn btn-primary">Вернуться в каталог</a>
+    </div>
+</section>
+{% endblock %}
+

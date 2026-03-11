@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Оформление заказа — Восточный Лист{% endblock %}
+{% block content %}
+<section class="section" style="padding-top: 6rem;">
+    <div class="container" style="max-width: 960px;">
+        <h1 class="section-title">Оформление заказа</h1>
+        <p class="section-subtitle" style="text-align:left;">Проверьте состав корзины и укажите данные для доставки и оплаты.</p>
+
+        <div class="checkout-layout" style="display:grid; grid-template-columns: 2fr 2fr; gap:2rem; align-items:start;">
+            <aside class="cart-summary" style="background:var(--cream); padding:1.5rem 1.75rem; border-radius:var(--radius); box-shadow:0 8px 20px rgba(0,0,0,0.04);">
+                <h3 style="margin-top:0; margin-bottom:1rem;">Ваш заказ</h3>
+                {% for item in cart.items.all %}
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem; font-size:.95rem;">
+                    <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                    <span>{{ item.total_price }} ₽</span>
+                </div>
+                {% endfor %}
+                <hr style="margin:1rem 0;">
+                <div style="display:flex; justify-content:space-between; font-size:1.1rem; margin-bottom:.5rem;">
+                    <strong>Итого:</strong>
+                    <strong class="product-price">{{ cart.total_price }} ₽</strong>
+                </div>
+                <p style="font-size:.85rem; color:var(--text-secondary); margin:0;">
+                    Оплата выполняется через СБП: вы сканируете QR‑код в приложении вашего банка и сами выбираете банк для оплаты.
+                </p>
+            </aside>
+
+            <div style="background:#fff; border-radius:var(--radius); box-shadow:0 12px 30px rgba(0,0,0,0.08); padding:1.75rem 1.75rem 1.5rem; text-align:center;">
+                <h2 style="font-size:1.25rem; margin:0 0 .75rem;">Оплата по СБП</h2>
+                <p style="margin:0 0 1.25rem; font-size:.9rem; color:var(--text-secondary);">
+                    Откройте приложение любого банка, выберите оплату по СБП и отсканируйте QR‑код ниже. Банк и карту вы выбираете сами.
+                </p>
+                <img src="/cart/sbp-qr/{{ order.id }}/" alt="QR‑код для оплаты по СБП" style="width:220px; max-width:100%; height:auto; margin-bottom:1rem;">
+                <p style="font-size:.8rem; color:var(--text-secondary); margin-top:.75rem;">
+                    После сканирования QR‑кода завершите оплату в приложении вашего банка.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+@media (max-width: 900px) {
+    .checkout-layout {
+        grid-template-columns: 1fr !important;
+    }
+}
+</style>
+{% endblock %}
+

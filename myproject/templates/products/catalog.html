@@ -32,9 +32,19 @@
             <div class="product-card">
                 <div class="product-image">
                     {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:contain;">
+                    {% elif product.slug == 'bai-hao-in-chzhen' %}
+                    <img src="{% static 'img/tea-white.svg' %}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:contain;">
+                    {% elif product.slug == 'da-hun-pao' or product.slug == 'te-guan-in' %}
+                    <img src="{% static 'img/tea-oolong.svg' %}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:contain;">
+                    {% elif product.slug == 'lunczin' %}
+                    <img src="{% static 'img/tea-green.svg' %}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:contain%;">
+                    {% elif product.slug == 'puer-shu' %}
+                    <img src="{% static 'img/tea-puer.svg' %}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:contain;">
+                    {% elif product.slug == 'dyan-hun' %}
+                    <img src="{% static 'img/tea-red.svg' %}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:contain;">
                     {% else %}
-                    <i class="fas fa-leaf"></i>
+                    <img src="{% static 'img/tea-default.svg' %}" alt="{{ product.name }}" style="width:100%; height:100%; object-fit:contain;">
                     {% endif %}
                 </div>
                 <div class="product-content">
